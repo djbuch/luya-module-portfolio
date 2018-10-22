@@ -185,14 +185,17 @@ class Item extends NgRestModel
     {
         $this->company_logo = \Yii::$app->storage->getImage($this->company_logo_id);
         $this->main_img = \Yii::$app->storage->getImage($this->main_img_id);
-
-        $json_other = json_decode($this->other_img_id, true);
         $this->other_img = [];
-        foreach ($json_other as $img) {
-            $this->other_img[] = [
-                'caption' => $img['caption'],
-                'img' => \Yii::$app->storage->getImage($img['imageId'])
-            ];
+        if ($this->other_img_id !== null) {
+            $json_other = json_decode($this->other_img_id, true);
+            if (isset($json_other[Yii::$app->composition->langShortCode])) {
+                foreach ($json_other[Yii::$app->composition->langShortCode] as $img) {
+                    $this->other_img[] = [
+                        'caption' => $img['caption'],
+                        'img' => \Yii::$app->storage->getImage($img['imageId'])
+                    ];
+                }
+            }
         }
 
         return parent::afterFind();
