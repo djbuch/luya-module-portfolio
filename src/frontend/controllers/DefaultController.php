@@ -30,7 +30,7 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function actionView($slug, $category)
+    public function actionView($slug, $group)
     {
         $item = Item::findOne(['slug' => $slug]);
 

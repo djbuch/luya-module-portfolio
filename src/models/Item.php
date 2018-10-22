@@ -5,6 +5,7 @@ namespace vavepl\portfolio\models;
 use luya\admin\traits\SortableTrait;
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
+use yii\helpers\Url;
 
 /**
  * Item.
@@ -14,6 +15,7 @@ use luya\admin\ngrest\base\NgRestModel;
  * @property integer $id
  * @property integer $group_id
  * @property string $name
+ * @property string $slug
  * @property string $company
  * @property string $company_address
  * @property string $company_postcode
@@ -42,7 +44,7 @@ class Item extends NgRestModel
     /**
      * @inheritdoc
      */
-    public $i18n = ['name', 'description', 'short_description','technologies', 'color', 'link'];
+    public $i18n = ['name', 'slug', 'description', 'short_description','technologies', 'color', 'link'];
 
     /**
      * @inheritdoc
@@ -69,6 +71,7 @@ class Item extends NgRestModel
             'id' => Yii::t('app', 'ID'),
             'group_id' => Yii::t('app', 'Group'),
             'name' => Yii::t('app', 'Name'),
+            'slug' => Yii::t('app', 'Slug'),
             'description' => Yii::t('app', 'Description'),
             'short_description' => Yii::t('app', 'Description courte'),
             'technologies' => Yii::t('app', 'Technologies'),
@@ -100,8 +103,9 @@ class Item extends NgRestModel
     {
         return [
             [['group_id', 'main_img_id', 'company_logo_id', 'is_active', 'priority'], 'integer'],
-            [['name', 'color', 'link', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector'], 'string', 'max' => 255],
-            [['description', 'short_description', 'other_img_id'], 'string']
+            [['name', 'color', 'link', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'slug'], 'string', 'max' => 255],
+            [['description', 'short_description', 'other_img_id'], 'string'],
+            [['slug'], 'unique'],
         ];
     }
 
@@ -126,6 +130,7 @@ class Item extends NgRestModel
                 'labelField' => 'group_name'
             ],
             'name' => 'text',
+            'slug' => ['slug', 'listener' => 'name'],
             'description' => 'text',
             'company' => 'text',
             'company_address' => 'text',
@@ -151,7 +156,7 @@ class Item extends NgRestModel
     {
         return [
             ['list', ['group_id', 'name', 'description', 'color', 'link', 'main_img_id', 'company_logo_id', 'is_active', 'priority']],
-            [['create', 'update'], ['group_id', 'name', 'description', 'short_description', 'color', 'link', 'main_img_id','other_img_id', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'company_logo_id', 'is_active', 'priority']],
+            [['create', 'update'], ['group_id', 'name', 'slug', 'description', 'short_description', 'color', 'link', 'main_img_id','other_img_id', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'company_logo_id', 'is_active', 'priority']],
             ['delete', false],
         ];
     }
@@ -180,6 +185,15 @@ class Item extends NgRestModel
 
     public function getGroup(){
         return $this->hasOne(Group::class, ['id' => 'group_id']);
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getViewUrl()
+    {
+        return Url::toRoute(['/news/default/view', 'slug' => $this->slug, 'group' => $this->group->slug]);
     }
 
 }

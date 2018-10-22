@@ -14,6 +14,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property integer $id
  * @property string $group_name
+ * @property string $slug
  * @property smallint $is_active
  * @property integer $priority
  */
@@ -23,7 +24,7 @@ class Group extends NgRestModel
     /**
      * @inheritdoc
      */
-    public $i18n = ['group_name'];
+    public $i18n = ['group_name', 'slug'];
 
     /**
      * @inheritdoc
@@ -61,7 +62,8 @@ class Group extends NgRestModel
     {
         return [
             [['is_active', 'priority'], 'integer'],
-            [['group_name'], 'string', 'max' => 255],
+            [['group_name', 'slug'], 'string', 'max' => 255],
+            [['slug'], 'unique'],
         ];
     }
 
@@ -80,6 +82,7 @@ class Group extends NgRestModel
     {
         return [
             'group_name' => 'text',
+            'slug' => ['slug', 'listener' => 'group_name'],
             'is_active' => ['toggleStatus', 'initValue' => 0],
             'priority' => 'sortable',
         ];
@@ -99,7 +102,7 @@ class Group extends NgRestModel
     {
         return [
             ['list', ['group_name', 'is_active', 'priority']],
-            [['create', 'update'], ['group_name', 'is_active', 'priority']],
+            [['create', 'update'], ['group_name', 'slug', 'is_active', 'priority']],
             ['delete', false],
         ];
     }

@@ -10,4 +10,13 @@ namespace vavepl\portfolio\frontend;
 class Module extends \luya\base\Module
 {
     public $useAppViewPath = true;
+
+
+    /**
+     * @var array
+     */
+    public $urlRules = [
+        ['pattern' => 'portfolio/<group>/<slug>', 'route' => 'news/default/view'],
+        ['pattern' => 'portfolio/<group>/', 'route' => 'news/default/detail'],
+    ];
 }
