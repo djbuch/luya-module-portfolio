@@ -16,7 +16,7 @@ class Module extends \luya\base\Module
      * @var array
      */
     public $urlRules = [
-        ['pattern' => 'portfolio/<group>/<slug>', 'route' => 'news/default/view'],
-        ['pattern' => 'portfolio/<group>/', 'route' => 'news/default/detail'],
+        ['pattern' => 'portfolio/<group>/<slug>', 'route' => 'portfolio/default/view'],
+        ['pattern' => 'portfolio/<group>/', 'route' => 'portfolio/default/detail'],
     ];
 }
