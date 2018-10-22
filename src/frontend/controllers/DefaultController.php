@@ -29,4 +29,13 @@ class DefaultController extends Controller
             'items' => $items
         ]);
     }
+
+    public function actionView($slug, $category)
+    {
+        $item = Item::findOne(['slug' => $slug]);
+
+        return $this->render('view', [
+            'item' => $item
+        ]);
+    }
 }

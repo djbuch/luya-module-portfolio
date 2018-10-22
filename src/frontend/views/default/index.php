@@ -23,8 +23,8 @@
         <div class="container-fluid">
             <div class="row">
                 <?php foreach($items as $key=>$element): ?>
-                    <div class="col-xs-12 col-lg-3 col-md-6 no-padding element_portfolio group<?= $element->group_id ?>" <?php if ($element->company_logo_id !== false) { ?>style="background-image: url('<?= $element->company_logo_id->getSource() ?>');"<?php } ?>>
-                        <div class="portfolio-fade-in" style="background-color:<?= $element->color ?>" data-target="#exampleModal1" data-href="<?= $element->link ?>" data-description="<?= $element->description ?>" <?php if ($element->main_img_id !== false) { ?>data-img="<?= $element->main_img_id->getSource() ?>"<?php } ?>>
+                    <div class="col-xs-12 col-lg-3 col-md-6 no-padding element_portfolio group<?= $element->group_id ?>" <?php if ($element->company_logo !== false) { ?>style="background-image: url('<?= $element->company_logo->getSource() ?>');"<?php } ?>>
+                        <div class="portfolio-fade-in" style="background-color:<?= $element->color ?>" data-target="#exampleModal1" data-href="<?= $element->link ?>" data-description="<?= $element->description ?>" <?php if ($element->main_img !== false) { ?>data-img="<?= $element->main_img->getSource() ?>"<?php } ?>>
                             <h1><?= $element->group->group_name ?></h1>
                             <h2><?= strtoupper($element->name) ?></h2>
                             <i class="fa fa-angle-right"></i>

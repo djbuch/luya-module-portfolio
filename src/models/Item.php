@@ -35,6 +35,10 @@ class Item extends NgRestModel
 {
     use SortableTrait;
 
+    public $main_img;
+    public $other_img;
+    public $company_logo;
+
     /**
      * @inheritdoc
      */
@@ -162,15 +166,17 @@ class Item extends NgRestModel
     }
 
     public static function getElements($limit = null){
-        $elements = self::find()->where(['is_active' => 1])->limit($limit)->all();
-        $data = [];
-        foreach ($elements as $key=>$element) {
-            $data[$key] = $element;
-            $data[$key]['company_logo_id'] = \Yii::$app->storage->getImage($element['company_logo_id']);
-            $data[$key]['main_img_id'] = \Yii::$app->storage->getImage($element['main_img_id']);
-        }
-        return $data;
+        return self::find()->where(['is_active' => 1])->limit($limit)->all();
     }
+
+    public function afterFind()
+    {
+        $this->company_logo = \Yii::$app->storage->getImage($this->company_logo_id);
+        $this->main_img = \Yii::$app->storage->getImage($this->main_img_id);
+
+        return parent::afterFind();
+    }
+
 
     public function getGroup(){
         return $this->hasOne(Group::class, ['id' => 'group_id']);
