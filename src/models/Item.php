@@ -186,6 +186,8 @@ class Item extends NgRestModel
         $this->company_logo = \Yii::$app->storage->getImage($this->company_logo_id);
         $this->main_img = \Yii::$app->storage->getImage($this->main_img_id);
 
+        print_r($this->other_img_id);
+
         return parent::afterFind();
     }
 
