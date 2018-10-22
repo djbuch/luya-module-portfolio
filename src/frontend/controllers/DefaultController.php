@@ -32,7 +32,7 @@ class DefaultController extends Controller
 
     public function actionView($slug, $group)
     {
-        $item = Item::findOne(['slug' => $slug]);
+        $item = Item::find()->where(['is_active' => 1])->i18nWhere('slug', $slug)->one();
 
         return $this->render('view', [
             'item' => $item
