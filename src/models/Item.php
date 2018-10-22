@@ -97,7 +97,7 @@ class Item extends NgRestModel
         return [
             [['group_id', 'main_img_id', 'company_logo_id', 'is_active', 'priority'], 'integer'],
             [['name', 'color', 'link', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector'], 'string', 'max' => 255],
-            [['description', 'short_description'], 'string']
+            [['description', 'short_description', 'other_img_id'], 'string']
         ];
     }
 
@@ -164,7 +164,7 @@ class Item extends NgRestModel
     }
 
     public function getGroup(){
-        return $this->hasOne(Group::className(), ['id' => 'group_id']);
+        return $this->hasOne(Group::class, ['id' => 'group_id']);
     }
 
 }
