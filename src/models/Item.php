@@ -69,19 +69,26 @@ class Item extends NgRestModel
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'group_id' => Yii::t('app', 'Group'),
-            'name' => Yii::t('app', 'Name'),
-            'slug' => Yii::t('app', 'Slug'),
+            'group_id' => Yii::t('app', 'Groupe'),
+            'name' => Yii::t('app', 'Nom'),
+            'slug' => Yii::t('app', 'Lien'),
             'description' => Yii::t('app', 'Description'),
             'short_description' => Yii::t('app', 'Description courte'),
             'technologies' => Yii::t('app', 'Technologies'),
-            'color' => Yii::t('app', 'Color'),
-            'link' => Yii::t('app', 'Link'),
+            'color' => Yii::t('app', 'Couleur'),
+            'link' => Yii::t('app', 'Lien'),
             'main_img_id' => Yii::t('app', 'Image principale'),
             'company_logo_id' => Yii::t('app', 'Logo société'),
             'other_img_id' => Yii::t('app', 'Autres images'),
-            'is_active' => Yii::t('app', 'Is Active'),
-            'priority' => Yii::t('app', 'Priority'),
+            'is_active' => Yii::t('app', 'Actif'),
+            'priority' => Yii::t('app', 'Priorité'),
+
+            'company' => Yii::t('app', 'Raison sociale'),
+            'company_address' => Yii::t('app', 'Adresse'),
+            'company_postcode' => Yii::t('app', 'Code Postal'),
+            'company_city' => Yii::t('app', 'Ville'),
+            'company_country' => Yii::t('app', 'Pays'),
+            'company_sector' => Yii::t('app', 'Secteur d\'activité'),
         ];
 
 

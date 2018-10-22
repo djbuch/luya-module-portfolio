@@ -6,6 +6,7 @@ use luya\admin\traits\SortableTrait;
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 /**
  * Group.
@@ -49,9 +50,10 @@ class Group extends NgRestModel
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'group_name' => Yii::t('app', 'Group Name'),
-            'is_active' => Yii::t('app', 'Is Active'),
-            'priority' => Yii::t('app', 'Priority'),
+            'group_name' => Yii::t('app', 'Nom'),
+            'slug' => Yii::t('app', 'Lien'),
+            'is_active' => Yii::t('app', 'Actif'),
+            'priority' => Yii::t('app', 'Priorité'),
         ];
     }
 
@@ -112,5 +114,18 @@ class Group extends NgRestModel
      */
     public static function getMenu(){
         return ArrayHelper::map(self::find()->where(['is_active' => 1])->all(), 'id', 'group_name');
+    }
+
+    public function getItems(){
+        return $this->hasMany(Item::class, ['group_id' => 'id']);
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getViewUrl()
+    {
+        return Url::toRoute(['/portfolio/default/group', 'slug' => $this->slug]);
     }
 }
