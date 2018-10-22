@@ -44,7 +44,7 @@ class Item extends NgRestModel
     /**
      * @inheritdoc
      */
-    public $i18n = ['name', 'slug', 'description', 'short_description','technologies', 'color', 'link'];
+    public $i18n = ['name', 'slug', 'description', 'short_description','technologies', 'color', 'link', 'other_img_id'];
 
     /**
      * @inheritdoc
