@@ -14,11 +14,20 @@ use luya\admin\ngrest\base\NgRestModel;
  * @property integer $id
  * @property integer $group_id
  * @property string $name
+ * @property string $company
+ * @property string $company_address
+ * @property string $company_postcode
+ * @property string $company_city
+ * @property string $company_country
+ * @property string $company_sector
+ * @property integer $company_logo_id
  * @property string $description
+ * @property string $short_description
+ * @property string $technologies
  * @property string $color
  * @property string $link
- * @property integer $img_max_id
- * @property integer $img_min_id
+ * @property integer $main_img_id
+ * @property array $other_img_id
  * @property smallint $is_active
  * @property integer $priority
  */
@@ -29,7 +38,7 @@ class Item extends NgRestModel
     /**
      * @inheritdoc
      */
-    public $i18n = ['name', 'description', 'color', 'link'];
+    public $i18n = ['name', 'description', 'short_description','technologies', 'color', 'link'];
 
     /**
      * @inheritdoc
@@ -57,13 +66,18 @@ class Item extends NgRestModel
             'group_id' => Yii::t('app', 'Group'),
             'name' => Yii::t('app', 'Name'),
             'description' => Yii::t('app', 'Description'),
+            'short_description' => Yii::t('app', 'Description courte'),
+            'technologies' => Yii::t('app', 'Technologies'),
             'color' => Yii::t('app', 'Color'),
             'link' => Yii::t('app', 'Link'),
-            'img_max_id' => Yii::t('app', 'Portfolio img'),
-            'img_min_id' => Yii::t('app', 'Logo img'),
+            'main_img_id' => Yii::t('app', 'Image principale'),
+            'company_logo_id' => Yii::t('app', 'Logo société'),
             'is_active' => Yii::t('app', 'Is Active'),
             'priority' => Yii::t('app', 'Priority'),
         ];
+
+
+
     }
 
     /**
@@ -80,8 +94,9 @@ class Item extends NgRestModel
     public function rules()
     {
         return [
-            [['group_id', 'img_max_id', 'img_min_id', 'is_active', 'priority'], 'integer'],
-            [['name', 'description', 'color', 'link'], 'string', 'max' => 255]
+            [['group_id', 'main_img_id', 'company_logo_id', 'is_active', 'priority'], 'integer'],
+            [['name', 'color', 'link', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector'], 'string', 'max' => 255],
+            [['description', 'short_description'], 'string']
         ];
     }
 
@@ -107,10 +122,11 @@ class Item extends NgRestModel
             ],
             'name' => 'text',
             'description' => 'text',
+            'short_description' => 'text',
             'color' => 'color',
             'link' => 'text',
-            'img_max_id' => 'image',
-            'img_min_id' => 'image',
+            'main_img_id' => 'image',
+            'company_logo_id' => 'image',
             'is_active' => ['toggleStatus', 'initValue' => 0],
             'priority' => 'sortable',
         ];
@@ -122,8 +138,8 @@ class Item extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            ['list', ['group_id', 'name', 'description', 'color', 'link', 'img_max_id', 'img_min_id', 'is_active', 'priority']],
-            [['create', 'update'], ['group_id', 'name', 'description', 'color', 'link', 'img_max_id', 'img_min_id', 'is_active', 'priority']],
+            ['list', ['group_id', 'name', 'description', 'color', 'link', 'main_img_id', 'company_logo_id', 'is_active', 'priority']],
+            [['create', 'update'], ['group_id', 'name', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'description', 'color', 'link', 'main_img_id', 'company_logo_id', 'is_active', 'priority']],
             ['delete', false],
         ];
     }
