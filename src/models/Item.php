@@ -193,7 +193,7 @@ class Item extends NgRestModel
      */
     public function getViewUrl()
     {
-        return Url::toRoute(['/news/default/view', 'slug' => $this->slug, 'group' => $this->group->slug]);
+        return Url::toRoute(['/portfolio/default/view', 'slug' => $this->slug, 'group' => $this->group->slug]);
     }
 
 }
