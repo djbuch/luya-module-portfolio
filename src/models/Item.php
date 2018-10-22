@@ -186,7 +186,7 @@ class Item extends NgRestModel
         $this->company_logo = \Yii::$app->storage->getImage($this->company_logo_id);
         $this->main_img = \Yii::$app->storage->getImage($this->main_img_id);
 
-        $json_other = json_decode($this->other_img_id);
+        $json_other = json_decode($this->other_img_id, true);
         $this->other_img = [];
         foreach ($json_other as $img) {
             $this->other_img[] = [
