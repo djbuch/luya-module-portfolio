@@ -134,7 +134,7 @@ class Item extends NgRestModel
             'link' => 'text',
             'main_img_id' => 'image',
             'company_logo_id' => 'image',
-            'other_img_id' => 'imagesArray',
+            'other_img_id' => 'imageArray',
             'is_active' => ['toggleStatus', 'initValue' => 0],
             'priority' => 'sortable',
         ];
