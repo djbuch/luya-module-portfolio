@@ -72,6 +72,7 @@ class Item extends NgRestModel
             'link' => Yii::t('app', 'Link'),
             'main_img_id' => Yii::t('app', 'Image principale'),
             'company_logo_id' => Yii::t('app', 'Logo société'),
+            'other_img_id' => Yii::t('app', 'Autres images'),
             'is_active' => Yii::t('app', 'Is Active'),
             'priority' => Yii::t('app', 'Priority'),
         ];
@@ -133,6 +134,7 @@ class Item extends NgRestModel
             'link' => 'text',
             'main_img_id' => 'image',
             'company_logo_id' => 'image',
+            'other_img_id' => 'imagesArray',
             'is_active' => ['toggleStatus', 'initValue' => 0],
             'priority' => 'sortable',
         ];
@@ -145,18 +147,18 @@ class Item extends NgRestModel
     {
         return [
             ['list', ['group_id', 'name', 'description', 'color', 'link', 'main_img_id', 'company_logo_id', 'is_active', 'priority']],
-            [['create', 'update'], ['group_id', 'name', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'description', 'color', 'link', 'main_img_id', 'company_logo_id', 'is_active', 'priority']],
+            [['create', 'update'], ['group_id', 'name', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'company_logo_id', 'description', 'color', 'link', 'main_img_id','other_img_id', 'is_active', 'priority']],
             ['delete', false],
         ];
     }
 
-    public static function getElements(){
-        $elements = self::find()->where(['is_active' => 1])->all();
+    public static function getElements($limit = null){
+        $elements = self::find()->where(['is_active' => 1])->limit($limit)->all();
         $data = [];
         foreach ($elements as $key=>$element) {
             $data[$key] = $element;
-            $data[$key]['img_min_id'] = \Yii::$app->storage->getImage($element['img_min_id']);
-            $data[$key]['img_max_id'] = \Yii::$app->storage->getImage($element['img_max_id']);
+            $data[$key]['company_logo_id'] = \Yii::$app->storage->getImage($element['company_logo_id']);
+            $data[$key]['main_img_id'] = \Yii::$app->storage->getImage($element['main_img_id']);
         }
         return $data;
     }
