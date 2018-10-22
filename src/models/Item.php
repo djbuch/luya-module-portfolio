@@ -147,8 +147,17 @@ class Item extends NgRestModel
     {
         return [
             ['list', ['group_id', 'name', 'description', 'color', 'link', 'main_img_id', 'company_logo_id', 'is_active', 'priority']],
-            [['create', 'update'], ['group_id', 'name', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'company_logo_id', 'description', 'color', 'link', 'main_img_id','other_img_id', 'is_active', 'priority']],
+            [['create', 'update'], ['group_id', 'name', 'description', 'short_description', 'color', 'link', 'main_img_id','other_img_id', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'company_logo_id', 'is_active', 'priority']],
             ['delete', false],
+        ];
+    }
+
+
+    public function ngRestAttributeGroups()
+    {
+        return [
+            [['company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'company_logo_id'], 'Société'],
+            [['main_img_id', 'other_img_id'], 'Images'],
         ];
     }
 
