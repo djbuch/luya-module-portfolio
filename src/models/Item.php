@@ -107,8 +107,8 @@ class Item extends NgRestModel
     {
         return [
             [['group_id', 'main_img_id', 'company_logo_id', 'is_active', 'priority'], 'integer'],
-            [['name', 'color', 'link', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'slug'], 'string', 'max' => 255],
-            [['description', 'short_description', 'other_img_id','technologies'], 'string'],
+            [['name', 'color', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'slug'], 'string', 'max' => 255],
+            [['description', 'short_description', 'other_img_id','technologies', 'link'], 'string'],
             [['slug'], 'unique'],
         ];
     }
@@ -136,6 +136,7 @@ class Item extends NgRestModel
             'name' => 'text',
             'slug' => ['slug', 'listener' => 'name'],
             'description' => 'text',
+            'technologies' => 'text',
             'company' => 'text',
             'company_address' => 'text',
             'company_postcode' => 'text',
@@ -144,7 +145,7 @@ class Item extends NgRestModel
             'company_sector' => 'text',
             'short_description' => 'text',
             'color' => 'color',
-            'link' => 'text',
+            'link' => 'link',
             'main_img_id' => 'image',
             'company_logo_id' => 'image',
             'other_img_id' => 'imageArray',
