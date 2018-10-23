@@ -94,10 +94,8 @@ class PortfolioBlock extends PhpBlock
      */
     public function getViewPath()
     {
-        if ($this->module instanceof Module) {
-            if ($this->module->useAppViewPath) {
-                return '@app/views/' . $this->module->id . '/blocks';
-            }
+        if (is_dir(\Yii::getAlias('@app/views/' . $this->module . '/blocks'))) {
+            return '@app/views/' . $this->module . '/blocks';
         }
 
         return parent::getViewPath();
