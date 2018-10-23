@@ -2,6 +2,7 @@
 
 namespace vavepl\portfolio\frontend\blocks;
 
+use vavepl\portfolio\frontend\Module;
 use vavepl\portfolio\models\Group;
 use vavepl\portfolio\models\Item;
 use luya\cms\base\PhpBlock;
