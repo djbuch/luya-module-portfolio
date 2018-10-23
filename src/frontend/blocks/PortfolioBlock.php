@@ -83,4 +83,22 @@ class PortfolioBlock extends PhpBlock
     {
         return '<h5 class="mb-3">Portfolio Block</h5>';
     }
+
+    /**
+     * Override the default Yii controller getViewPath method. To define the template folders in where
+     * the templates are located. Why? Basically some modules needs to put theyr templates inside of the client
+     * repository.
+     *
+     * @return string
+     */
+    public function getViewPath()
+    {
+        if ($this->module instanceof Module) {
+            if ($this->module->useAppViewPath) {
+                return '@app/views/' . $this->module->id . '/blocks';
+            }
+        }
+
+        return parent::getViewPath();
+    }
 }
