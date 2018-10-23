@@ -160,7 +160,7 @@ class Item extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            ['list', ['group_id', 'name', 'description', 'color', 'link', 'main_img_id', 'company_logo_id', 'is_active', 'priority']],
+            ['list', ['group_id', 'name', 'description', 'main_img_id', 'company_logo_id', 'is_active', 'priority']],
             [['create', 'update'], ['group_id', 'name', 'slug', 'description', 'short_description','technologies', 'color', 'link', 'main_img_id','other_img_id', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'company_logo_id', 'is_active', 'priority']],
             ['delete', false],
         ];
