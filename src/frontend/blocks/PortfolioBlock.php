@@ -60,7 +60,13 @@ class PortfolioBlock extends PhpBlock
     public function config()
     {
         return [
-
+            'cfgs' => [
+                [
+                    'type' => self::TYPE_TEXT,
+                    'var' => 'nb_affich',
+                    'label' => 'Nombre d\'éléments à afficher'
+                ],
+            ],
         ];
     }
 
@@ -71,7 +77,7 @@ class PortfolioBlock extends PhpBlock
     {
         return [
             'menu' => Group::getMenu(),
-            'elements' => Item::getElements()
+            'elements' => Item::getElements($this->getCfgValue('nb_affiche', 2))
         ];
     }
 
