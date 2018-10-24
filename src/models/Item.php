@@ -23,6 +23,7 @@ use yii\helpers\Url;
  * @property string $company_country
  * @property string $company_sector
  * @property integer $company_logo_id
+ * @property integer $date
  * @property string $description
  * @property string $short_description
  * @property string $technologies
@@ -82,6 +83,7 @@ class Item extends NgRestModel
             'other_img_id' => Yii::t('app', 'Autres images'),
             'is_active' => Yii::t('app', 'Actif'),
             'priority' => Yii::t('app', 'Priorité'),
+            'date' => Yii::t('app', 'Date'),
 
             'company' => Yii::t('app', 'Raison sociale'),
             'company_address' => Yii::t('app', 'Adresse'),
@@ -97,7 +99,15 @@ class Item extends NgRestModel
      */
     public static function sortableField()
     {
-        return 'priority';
+        return 'date';
+    }
+
+    /**
+     * @return string
+     */
+    public static function sortableOrder()
+    {
+        return SORT_DESC;
     }
 
     /**
@@ -106,7 +116,7 @@ class Item extends NgRestModel
     public function rules()
     {
         return [
-            [['group_id', 'main_img_id', 'company_logo_id', 'is_active', 'priority'], 'integer'],
+            [['group_id', 'main_img_id', 'company_logo_id', 'is_active', 'priority', 'date'], 'integer'],
             [['name', 'color', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'slug'], 'string', 'max' => 255],
             [['description', 'short_description', 'other_img_id','technologies', 'link'], 'string'],
             [['slug'], 'unique'],
@@ -144,6 +154,7 @@ class Item extends NgRestModel
             'company_country' => 'text',
             'company_sector' => 'text',
             'short_description' => 'textarea',
+            'date' => 'date',
             'color' => 'color',
             'link' => 'link',
             'main_img_id' => 'image',
@@ -160,8 +171,8 @@ class Item extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            ['list', ['group_id', 'name', 'description', 'main_img_id', 'company_logo_id', 'is_active', 'priority']],
-            [['create', 'update'], ['group_id', 'name', 'slug', 'description', 'short_description','technologies', 'color', 'link', 'main_img_id','other_img_id', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'company_logo_id', 'is_active', 'priority']],
+            ['list', ['group_id', 'name', 'description', 'main_img_id', 'company_logo_id', 'is_active', 'date', 'priority']],
+            [['create', 'update'], ['group_id', 'name', 'slug', 'description', 'short_description','technologies', 'date', 'color', 'link', 'main_img_id','other_img_id', 'company', 'company_address', 'company_postcode', 'company_city', 'company_country', 'company_sector', 'company_logo_id', 'is_active', 'priority']],
             ['delete', false],
         ];
     }
